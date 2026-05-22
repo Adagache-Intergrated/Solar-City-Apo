@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adagache Autos | Adagache Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .autos-gradient {
+      background: linear-gradient(135deg, #c0c0c0, #ffffff, #a8a8a8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .autos-gold {
+      background: linear-gradient(135deg, #fff4c7, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+    .car-card {
+      background: linear-gradient(160deg, #111 0%, #070707 100%);
+      border: 1px solid rgba(192,192,192,0.1);
+      border-radius: 32px;
+      overflow: hidden;
+      transition: all 0.4s;
+      position: relative;
+    }
+    .car-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(212,175,55,0.12); border-color: rgba(212,175,55,0.22); }
+    .car-image-box {
+      height: 220px;
+      background: linear-gradient(135deg, #161616, #0a0a0a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    .car-image-box::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.04) 0%, transparent 70%);
+    }
+    .car-tag {
+      position: absolute; top: 16px; right: 16px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: black; font-size: 0.72rem; font-weight: 800;
+      padding: 7px 14px; border-radius: 20px;
+    }
+    .car-info { padding: 30px; }
+    .car-brand { color: var(--muted); font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+    .car-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; }
+    .car-specs {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .car-spec {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .car-spec i { color: var(--gold); font-size: 0.72rem; }
+    .car-price {
+      font-size: 1.6rem; font-weight: 900;
+      margin: 18px 0 20px;
+    }
+    .car-btn {
+      display: block; text-align: center;
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
+      color: var(--gold-light); font-weight: 800;
+      padding: 14px; border-radius: 14px;
+      text-decoration: none; font-size: 0.88rem;
+      transition: 0.3s;
+    }
+    .car-btn:hover { background: rgba(212,175,55,0.16); }
+    .financing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .financing-card {
+      padding: 38px 28px;
+      border-radius: 26px;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(212,175,55,0.07);
+      transition: 0.3s;
+    }
+    .financing-card:hover { background: rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.18); transform: translateY(-6px); }
+    .financing-icon { font-size: 2.8rem; margin-bottom: 18px; display: block; }
+    .financing-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; }
+    .financing-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+    .service-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 22px;
+    }
+    .after-sale-card {
+      padding: 32px 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: 0.35s;
+    }
+    .after-sale-card:hover { background: rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.15); transform: translateY(-6px); }
+    .as-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+    .after-sale-card h4 { font-weight: 800; font-size: 0.95rem; margin-bottom: 8px; }
+    .after-sale-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+    .brands-row {
+      display: flex; flex-wrap: wrap; gap: 18px; justify-content: center;
+      margin-top: 50px;
+    }
+    .brand-pill {
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 1px solid rgba(212,175,55,0.12);
+      background: rgba(212,175,55,0.04);
+      font-weight: 700; font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+      transition: 0.25s;
+    }
+    .brand-pill:hover { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.3); color: var(--gold-light); }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20a%20vehicle" class="floating-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- SHARED HEADER -->
+<header>
+  <div class="nav-container">
+    <a href="index (1).html" class="logo-area">
+      <img src="images/adagache-autos.png.png" alt="Adagache Autos Logo" class="site-logo" id="siteLogo"
+        onerror="this.src='https://placehold.co/180x60/111111/d4af37?text=AUTOS'">
+      <div class="logo-text">
+        <h1 class="gold-text" style="font-size:1.45rem;font-weight:900;letter-spacing:2px;line-height:1;">ADAGACHE AUTOS</h1>
+        <p>BY ADAGACHE GROUP</p>
+      </div>
+    </a>
+    <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index (1).html">Home</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#financing">Financing</a>
+      <a href="#aftersales">After Sales</a>
+      <a href="#contact-section">Contact</a>
+      <a href="oil-gas.html"><i class="fas fa-fire-flame-curved" style="color:#ff9500;font-size:0.75rem;"></i> Oil & Gas</a>
+      <a href="travel.html"><i class="fas fa-plane" style="color:#00d4ff;font-size:0.75rem;"></i> Travel</a>
+      <a href="integrated.html"><i class="fas fa-globe" style="color:var(--gold);font-size:0.75rem;"></i> Integrated</a>
+      <a href="autos.html" class="active"><i class="fas fa-car" style="color:var(--gold);font-size:0.75rem;"></i> Autos</a>
+      <a href="https://wa.me/2348030702010" class="nav-btn" target="_blank"><i class="fab fa-whatsapp"></i> Buy a Car</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1600&auto=format&fit=crop');"></div>
+  <div class="service-hero-overlay" style="background:radial-gradient(ellipse at center top,rgba(212,175,55,0.06) 0%,transparent 60%),linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(5,5,5,0.96) 100%);"></div>
+
+  <div class="service-hero-content">
+    <div class="service-hero-tag">
+      <i class="fas fa-car" style="color:var(--gold);"></i>
+      PREMIUM AUTOMOBILE DEALERSHIP
+    </div>
+
+    <div class="service-logo-wrap">
+      <img src="images/adagache-autos.png.png" alt="Adagache Autos"
+        class="service-logo-img"
+        onerror="this.src='https://placehold.co/400x200/111111/d4af37?text=ADAGACHE+AUTOS'">
+    </div>
+
+    <h2>
+      <span class="autos-gold">DRIVE</span><br>
+      IN PURE<br>
+      LUXURY
+    </h2>
+    <p>Adagache Autos is your premier destination for new and pre-owned luxury vehicles in Abuja. Experience world-class automobile dealership services with flexible financing, seamless documentation, and exceptional after-sales support.</p>
+
+    <div class="service-hero-actions">
+      <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20looking%20for%20a%20luxury%20vehicle" target="_blank" class="primary-btn">
+        <i class="fab fa-whatsapp"></i> Browse Available Cars
+      </a>
+      <a href="#inventory" class="secondary-btn">
+        <i class="fas fa-car-side"></i> View Inventory
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hero-stat">
+      <h3 class="autos-gold">200+</h3>
+      <p>Vehicles Sold</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="autos-gold">50+</h3>
+      <p>Brands Available</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="autos-gold">100%</h3>
+      <p>Verified & Documented</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="autos-gold">Flex</h3>
+      <p>Financing Options</p>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTORY -->
+<section class="section" id="inventory" style="background:#060606;">
+  <div class="container">
+    <div class="section-head">
+      <small>Current Listings</small>
+      <h2>Featured <span class="gold-text">Vehicles</span></h2>
+      <p>A curated selection of premium vehicles available for immediate purchase or order. Contact us for current pricing and availability.</p>
+    </div>
+    <div class="car-grid">
+      <div class="car-card">
+        <div class="car-image-box">🚙<div class="car-tag">AVAILABLE</div></div>
+        <div class="car-info">
+          <div class="car-brand">Toyota</div>
+          <h3>Land Cruiser Prado</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-gas-pump"></i> 4.0L V6</span>
+            <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            <span class="car-spec"><i class="fas fa-calendar"></i> 2022</span>
+          </div>
+          <div class="car-price gold-text">Contact For Price</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20the%20Toyota%20Land%20Cruiser%20Prado" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-image-box">🚗<div class="car-tag">HOT DEAL</div></div>
+        <div class="car-info">
+          <div class="car-brand">Mercedes-Benz</div>
+          <h3>GLE 450 AMG</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-gas-pump"></i> 3.0L Turbo</span>
+            <span class="car-spec"><i class="fas fa-cog"></i> 9-Speed Auto</span>
+            <span class="car-spec"><i class="fas fa-calendar"></i> 2023</span>
+          </div>
+          <div class="car-price gold-text">Contact For Price</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20the%20Mercedes%20GLE%20450" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-image-box">🏎️<div class="car-tag">LUXURY</div></div>
+        <div class="car-info">
+          <div class="car-brand">BMW</div>
+          <h3>X5 xDrive40i</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-gas-pump"></i> 3.0L Inline-6</span>
+            <span class="car-spec"><i class="fas fa-cog"></i> 8-Speed Auto</span>
+            <span class="car-spec"><i class="fas fa-calendar"></i> 2022</span>
+          </div>
+          <div class="car-price gold-text">Contact For Price</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20the%20BMW%20X5" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-image-box">🚐<div class="car-tag">FLEET</div></div>
+        <div class="car-info">
+          <div class="car-brand">Toyota</div>
+          <h3>Hiace Bus (Hummer)</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-gas-pump"></i> 2.7L Petrol</span>
+            <span class="car-spec"><i class="fas fa-cog"></i> Automatic</span>
+            <span class="car-spec"><i class="fas fa-users"></i> 14 Seater</span>
+          </div>
+          <div class="car-price gold-text">Contact For Price</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20the%20Toyota%20Hiace" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-image-box">🚘<div class="car-tag">POPULAR</div></div>
+        <div class="car-info">
+          <div class="car-brand">Lexus</div>
+          <h3>LX 600 Executive</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-gas-pump"></i> 3.5L V6 Twin Turbo</span>
+            <span class="car-spec"><i class="fas fa-cog"></i> 10-Speed</span>
+            <span class="car-spec"><i class="fas fa-calendar"></i> 2023</span>
+          </div>
+          <div class="car-price gold-text">Contact For Price</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20am%20interested%20in%20the%20Lexus%20LX%20600" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-image-box">🚗<div class="car-tag">ORDER NOW</div></div>
+        <div class="car-info">
+          <div class="car-brand">Any Brand</div>
+          <h3>Custom Vehicle Order</h3>
+          <div class="car-specs">
+            <span class="car-spec"><i class="fas fa-star"></i> Any Spec</span>
+            <span class="car-spec"><i class="fas fa-globe"></i> Any Market</span>
+            <span class="car-spec"><i class="fas fa-truck"></i> We Ship</span>
+          </div>
+          <div class="car-price gold-text">Request Quote</div>
+          <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20want%20to%20make%20a%20custom%20vehicle%20order" target="_blank" class="car-btn"><i class="fab fa-whatsapp"></i> Place Custom Order</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRANDS -->
+    <div class="section-head" style="margin-top:80px;margin-bottom:20px;">
+      <small>Brands We Deal In</small>
+      <h2>We Source <span class="gold-text">All Major Brands</span></h2>
+    </div>
+    <div class="brands-row">
+      <div class="brand-pill">Toyota</div>
+      <div class="brand-pill">Lexus</div>
+      <div class="brand-pill">Mercedes-Benz</div>
+      <div class="brand-pill">BMW</div>
+      <div class="brand-pill">Land Rover</div>
+      <div class="brand-pill">Porsche</div>
+      <div class="brand-pill">Audi</div>
+      <div class="brand-pill">Honda</div>
+      <div class="brand-pill">Ford</div>
+      <div class="brand-pill">Jeep</div>
+      <div class="brand-pill">Dodge</div>
+      <div class="brand-pill">Chevrolet</div>
+      <div class="brand-pill">Hyundai</div>
+      <div class="brand-pill">Kia</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section class="section" id="financing" style="background:#030303;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <small>Flexible Payment</small>
+      <h2>Vehicle <span class="gold-text">Financing Options</span></h2>
+      <p>We make owning your dream car easier than ever with flexible, transparent financing plans tailored to your financial capacity.</p>
+    </div>
+    <div class="financing-grid">
+      <div class="financing-card">
+        <span class="financing-icon">💵</span>
+        <h3>Outright Purchase</h3>
+        <p>Pay the full vehicle price and drive away same day with complete documentation. Best rates available for full payment clients.</p>
+      </div>
+      <div class="financing-card">
+        <span class="financing-icon">📅</span>
+        <h3>Installment Plan</h3>
+        <p>Spread your vehicle payment over 3 to 12 months with a reasonable down payment. Flexible terms with simple interest structures.</p>
+      </div>
+      <div class="financing-card">
+        <span class="financing-icon">🏦</span>
+        <h3>Bank Financing</h3>
+        <p>We work with leading Nigerian commercial banks to facilitate vehicle loan arrangements. We guide you through the entire application process.</p>
+      </div>
+      <div class="financing-card">
+        <span class="financing-icon">🤝</span>
+        <h3>Corporate Fleet Deals</h3>
+        <p>Special bulk pricing and customized payment structures for businesses purchasing 3 or more vehicles for corporate fleet expansion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFTER SALES -->
+<section class="section" id="aftersales" style="background:#060606;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <small>We Don't Stop At Sale</small>
+      <h2>After-Sale <span class="gold-text">Services</span></h2>
+      <p>Our relationship with you doesn't end at vehicle handover. We provide comprehensive after-sale support to keep you on the road in style.</p>
+    </div>
+    <div class="service-row">
+      <div class="after-sale-card">
+        <span class="as-icon">📝</span>
+        <h4>Documentation Support</h4>
+        <p>Full assistance with change of ownership, FRSC papers, customs duty clearance, and all necessary vehicle documentation.</p>
+      </div>
+      <div class="after-sale-card">
+        <span class="as-icon">🔧</span>
+        <h4>Maintenance Referrals</h4>
+        <p>Access to our network of trusted, certified automobile technicians and service centres across Abuja for routine and specialist maintenance.</p>
+      </div>
+      <div class="after-sale-card">
+        <span class="as-icon">🛡️</span>
+        <h4>Insurance Assistance</h4>
+        <p>We connect you with leading insurers for comprehensive third-party and full motor insurance at competitive premiums.</p>
+      </div>
+      <div class="after-sale-card">
+        <span class="as-icon">🔍</span>
+        <h4>Vehicle Inspection</h4>
+        <p>Pre-purchase inspection services to verify the authenticity, condition, and value of any vehicle you wish to buy — from us or elsewhere.</p>
+      </div>
+      <div class="after-sale-card">
+        <span class="as-icon">📦</span>
+        <h4>Spare Parts Sourcing</h4>
+        <p>Access to genuine OEM and aftermarket spare parts for all major vehicle brands. We source locally and internationally on request.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact-section">
+  <div class="container">
+    <div class="cta-section glass">
+      <div class="section-head" style="margin-bottom:0;">
+        <small>Get Behind The Wheel</small>
+        <h2>Your Dream Car Is <span class="gold-text">One Message Away</span></h2>
+        <p>Whether you know exactly what you want or need expert guidance, our team at Adagache Autos is ready to find the perfect vehicle for you. Reach out now.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Autos,%20I%20want%20to%20buy%20a%20vehicle" target="_blank" class="primary-btn">
+          <i class="fab fa-whatsapp"></i> Buy a Car Now
+        </a>
+        <a href="tel:08030702010" class="secondary-btn"><i class="fas fa-phone"></i> Call 08030702010</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2 class="gold-text">ADAGACHE AUTOS</h2>
+      <p>LUXURY • SPEED • EXCELLENCE</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Adagache Homes</a>
+      <a href="oil-gas.html">Oil & Gas</a>
+      <a href="travel.html">Travels & Tours</a>
+      <a href="integrated.html">Integrated Global</a>
+      <a href="autos.html">Autos</a>
+    </div>
+    <div class="footer-contact">
+      <a href="https://instagram.com/adagachehomes" class="instagram" target="_blank"><i class="fab fa-instagram"></i> @adagachehomes</a>
+      <a href="mailto:Adagachehomes@gmail.com" style="color:var(--muted);font-size:0.85rem;">Adagachehomes@gmail.com</a>
+      <a href="tel:08030702010" class="phone">08030702010</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

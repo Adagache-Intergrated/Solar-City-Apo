@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adagache Travels & Tours | Adagache Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .travel-gradient {
+      background: linear-gradient(135deg, #00d4ff, #0080ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .destination-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .destination-card {
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      height: 380px;
+      cursor: pointer;
+      transition: transform 0.4s;
+      border: 1px solid rgba(0,212,255,0.1);
+    }
+    .destination-card:hover { transform: translateY(-10px); }
+    .destination-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s;
+    }
+    .destination-card:hover .destination-bg { transform: scale(1.06); }
+    .destination-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    }
+    .destination-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px;
+    }
+    .dest-tag {
+      display: inline-block;
+      background: rgba(0,212,255,0.15);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: #00d4ff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .destination-content h3 { font-size: 1.7rem; font-weight: 900; margin-bottom: 8px; }
+    .destination-content p { color: rgba(255,255,255,0.75); font-size: 0.85rem; }
+    .package-card {
+      background: linear-gradient(160deg, #0a0a14 0%, #060610 100%);
+      border: 1px solid rgba(0,212,255,0.08);
+      border-radius: 32px;
+      padding: 42px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .package-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .package-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(0,212,255,0.07); border-color: rgba(0,212,255,0.18); }
+    .package-card:hover::after { opacity: 1; }
+    .package-icon {
+      width: 72px; height: 72px; border-radius: 22px;
+      background: rgba(0,212,255,0.07);
+      border: 1px solid rgba(0,212,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.9rem; margin-bottom: 24px;
+    }
+    .package-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
+    .package-card p { color: var(--muted); line-height: 1.75; font-size: 0.9rem; margin-bottom: 18px; }
+    .package-features { list-style: none; }
+    .package-features li {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.83rem;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .package-features li i { color: #00d4ff; font-size: 0.75rem; }
+    .testimonial-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(0,212,255,0.07);
+      border-radius: 24px;
+      padding: 36px 30px;
+      transition: 0.3s;
+    }
+    .testimonial-card:hover { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.15); }
+    .stars { color: #ffd700; font-size: 0.9rem; margin-bottom: 16px; }
+    .testimonial-card p { color: rgba(255,255,255,0.78); line-height: 1.75; font-size: 0.9rem; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(0,212,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #00d4ff;
+    }
+    .author-info strong { display: block; font-size: 0.9rem; }
+    .author-info span { color: var(--muted); font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Travels,%20I%20want%20to%20plan%20a%20trip" class="floating-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- SHARED HEADER -->
+<header>
+  <div class="nav-container">
+    <a href="index (1).html" class="logo-area">
+      <img src="images/adagache-travel-tours.png.png" alt="Adagache Travels & Tours Logo" class="site-logo" id="siteLogo"
+        onerror="this.src='https://placehold.co/180x60/111111/00d4ff?text=TRAVELS'">
+      <div class="logo-text">
+        <h1 style="background:linear-gradient(135deg,#a0eaff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.45rem;font-weight:900;letter-spacing:2px;line-height:1;">TRAVELS & TOURS</h1>
+        <p>BY ADAGACHE GROUP</p>
+      </div>
+    </a>
+    <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index (1).html">Home</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#packages">Packages</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact-section">Contact</a>
+      <a href="oil-gas.html"><i class="fas fa-fire-flame-curved" style="color:#ff9500;font-size:0.75rem;"></i> Oil & Gas</a>
+      <a href="travel.html" class="active"><i class="fas fa-plane" style="color:#00d4ff;font-size:0.75rem;"></i> Travel</a>
+      <a href="integrated.html"><i class="fas fa-globe" style="color:var(--gold);font-size:0.75rem;"></i> Integrated</a>
+      <a href="autos.html"><i class="fas fa-car" style="color:var(--gold);font-size:0.75rem;"></i> Autos</a>
+      <a href="https://wa.me/2348030702010" class="nav-btn" target="_blank"><i class="fab fa-whatsapp"></i> Plan a Trip</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600&auto=format&fit=crop');"></div>
+  <div class="service-hero-overlay" style="background:radial-gradient(ellipse at center top,rgba(0,212,255,0.06) 0%,transparent 60%),linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(5,5,5,0.95) 100%);"></div>
+
+  <div class="service-hero-content">
+    <div class="service-hero-tag" style="border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.07);color:#a0eaff;">
+      <i class="fas fa-plane" style="color:#00d4ff;"></i>
+      PREMIUM TRAVEL EXPERIENCES
+    </div>
+
+    <div class="service-logo-wrap" style="border-color:rgba(0,212,255,0.2);">
+      <img src="images/adagache-travel-tours.png.png" alt="Adagache Travels & Tours"
+        class="service-logo-img"
+        onerror="this.src='https://placehold.co/400x200/111111/00d4ff?text=ADAGACHE+TRAVELS'">
+    </div>
+
+    <h2>
+      <span class="travel-gradient">EXPLORE</span><br>
+      THE WORLD<br>
+      IN LUXURY
+    </h2>
+    <p>From Abuja to any destination on Earth — Adagache Travels & Tours crafts unforgettable journeys with seamless flight bookings, luxury hotel arrangements, visa assistance, and tailor-made tour packages.</p>
+
+    <div class="service-hero-actions">
+      <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Travels,%20I%20want%20to%20plan%20a%20trip" target="_blank" class="primary-btn">
+        <i class="fab fa-whatsapp"></i> Plan Your Trip Now
+      </a>
+      <a href="#packages" class="secondary-btn">
+        <i class="fas fa-suitcase"></i> View Packages
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hero-stat">
+      <h3 class="travel-gradient">50+</h3>
+      <p>Countries Covered</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="travel-gradient">1,000+</h3>
+      <p>Happy Travellers</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="travel-gradient">100%</h3>
+      <p>Visa Success Rate</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="travel-gradient">24/7</h3>
+      <p>Travel Support</p>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section" id="destinations" style="background:#060606;">
+  <div class="container">
+    <div class="section-head">
+      <small>Top Picks</small>
+      <h2>Popular <span class="travel-gradient">Destinations</span></h2>
+      <p>Handpicked destinations our clients love — from African getaways to European escapes and Middle Eastern luxury experiences.</p>
+    </div>
+    <div class="destination-grid">
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">MIDDLE EAST</span>
+          <h3>Dubai, UAE</h3>
+          <p>Luxury skyscrapers, world-class shopping, and desert adventures</p>
+        </div>
+      </div>
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1549144511-f099e773c147?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">EUROPE</span>
+          <h3>London, UK</h3>
+          <p>Royal heritage, world-class museums, and iconic landmarks</p>
+        </div>
+      </div>
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1541518763669-27fef04b14ea?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">AFRICA</span>
+          <h3>Cape Town, South Africa</h3>
+          <p>Scenic mountains, vibrant culture, and breathtaking coastlines</p>
+        </div>
+      </div>
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">EUROPE</span>
+          <h3>Paris, France</h3>
+          <p>Romance, haute cuisine, and the timeless Eiffel Tower</p>
+        </div>
+      </div>
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">ASIA</span>
+          <h3>Istanbul, Turkey</h3>
+          <p>Where East meets West — historic bazaars and stunning mosques</p>
+        </div>
+      </div>
+      <div class="destination-card">
+        <div class="destination-bg" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop');"></div>
+        <div class="destination-overlay"></div>
+        <div class="destination-content">
+          <span class="dest-tag">ISLAND</span>
+          <h3>Maldives</h3>
+          <p>Crystal lagoons, overwater bungalows, and pure tropical paradise</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages" style="background:#040404;border-top:1px solid rgba(0,212,255,0.06);">
+  <div class="container">
+    <div class="section-head">
+      <small>Travel Packages</small>
+      <h2>What We <span class="travel-gradient">Handle For You</span></h2>
+      <p>End-to-end travel services so you can focus purely on enjoying every moment of your journey.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px;">
+      <div class="package-card">
+        <div class="package-icon">✈️</div>
+        <h3>Flight Bookings</h3>
+        <p>Domestic and international flight reservations at the best rates. Business class and economy options available with full itinerary management.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Local & International Routes</li>
+          <li><i class="fas fa-check"></i> Best-Rate Guarantee</li>
+          <li><i class="fas fa-check"></i> E-ticket Delivery</li>
+          <li><i class="fas fa-check"></i> Multi-city Options</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <div class="package-icon">🏨</div>
+        <h3>Hotel Reservations</h3>
+        <p>Luxury to budget hotel bookings worldwide. We secure the best rates with free cancellation options and ensure you get rooms that match your travel style.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> 5-Star to Budget Options</li>
+          <li><i class="fas fa-check"></i> Worldwide Coverage</li>
+          <li><i class="fas fa-check"></i> Breakfast Inclusions</li>
+          <li><i class="fas fa-check"></i> Airport Transfer Add-ons</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <div class="package-icon">📋</div>
+        <h3>Visa Assistance</h3>
+        <p>Expert guidance for tourist, business, student, and work visa applications for destinations including UAE, UK, USA, Canada, Schengen, and more.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Document Preparation</li>
+          <li><i class="fas fa-check"></i> Application Submission</li>
+          <li><i class="fas fa-check"></i> Interview Coaching</li>
+          <li><i class="fas fa-check"></i> Status Tracking</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <div class="package-icon">🗺️</div>
+        <h3>Tour Packages</h3>
+        <p>Fully packaged group and private tours with guided experiences, cultural immersions, adventure activities, and luxury leisure options worldwide.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Guided City Tours</li>
+          <li><i class="fas fa-check"></i> Adventure Packages</li>
+          <li><i class="fas fa-check"></i> Honeymoon Specials</li>
+          <li><i class="fas fa-check"></i> Corporate Travel Deals</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <div class="package-icon">🛡️</div>
+        <h3>Travel Insurance</h3>
+        <p>Comprehensive travel insurance covering flight cancellations, medical emergencies, lost luggage, and trip interruptions for total peace of mind.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Medical Coverage</li>
+          <li><i class="fas fa-check"></i> Trip Cancellation Cover</li>
+          <li><i class="fas fa-check"></i> Baggage Protection</li>
+          <li><i class="fas fa-check"></i> 24/7 Emergency Line</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <div class="package-icon">🎓</div>
+        <h3>Study Abroad Support</h3>
+        <p>Student travel packages including university application assistance, student visa support, accommodation booking, and orientation support packages.</p>
+        <ul class="package-features">
+          <li><i class="fas fa-check"></i> Student Visa Guidance</li>
+          <li><i class="fas fa-check"></i> Accommodation Booking</li>
+          <li><i class="fas fa-check"></i> School Application Support</li>
+          <li><i class="fas fa-check"></i> Pre-Departure Briefing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials" style="background:#020202;border-top:1px solid rgba(0,212,255,0.05);">
+  <div class="container">
+    <div class="section-head">
+      <small>Client Reviews</small>
+      <h2>What Our <span class="travel-gradient">Travellers Say</span></h2>
+      <p>Thousands of happy travellers have explored the world with Adagache Travels. Here's what a few of them had to say.</p>
+    </div>
+    <div class="testimonial-row">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>Adagache Travels handled my Dubai trip from start to finish — visa, flights, hotel, and tours. Everything was seamless. I did nothing but show up and enjoy. Will definitely use them again!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <div class="author-info"><strong>Chidinma O.</strong><span>Abuja, Nigeria — Dubai Trip</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>I was nervous about my UK visa but the team guided me through every document and the interview preparation. Got my visa in 10 working days! Highly professional service.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <div class="author-info"><strong>Emeka B.</strong><span>Lagos, Nigeria — UK Visa</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>Our honeymoon to the Maldives was absolutely perfect. Every detail — the overwater villa, the transfers, the sunset cruise — was arranged to perfection. Thank you, Adagache!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <div class="author-info"><strong>Mr & Mrs Afolabi</strong><span>Abuja, Nigeria — Maldives Honeymoon</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact-section">
+  <div class="container">
+    <div class="cta-section glass">
+      <div class="section-head" style="margin-bottom:0;">
+        <small>Your Journey Begins Here</small>
+        <h2>Ready To <span class="travel-gradient">Explore?</span></h2>
+        <p>Let Adagache Travels & Tours handle every detail of your next adventure. Contact us today and let's start planning your dream trip.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Travels,%20I%20want%20to%20plan%20a%20trip" target="_blank" class="primary-btn">
+          <i class="fab fa-whatsapp"></i> Start Planning
+        </a>
+        <a href="tel:08030702010" class="secondary-btn"><i class="fas fa-phone"></i> Call 08030702010</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2 style="background:linear-gradient(135deg,#a0eaff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.5rem;font-weight:900;">ADAGACHE TRAVELS</h2>
+      <p>EXPLORE • EXPERIENCE • ENJOY</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Adagache Homes</a>
+      <a href="oil-gas.html">Oil & Gas</a>
+      <a href="travel.html">Travels & Tours</a>
+      <a href="integrated.html">Integrated Global</a>
+      <a href="autos.html">Autos</a>
+    </div>
+    <div class="footer-contact">
+      <a href="https://instagram.com/adagachehomes" class="instagram" target="_blank"><i class="fab fa-instagram"></i> @adagachehomes</a>
+      <a href="mailto:Adagachehomes@gmail.com" style="color:var(--muted);font-size:0.85rem;">Adagachehomes@gmail.com</a>
+      <a href="tel:08030702010" class="phone">08030702010</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

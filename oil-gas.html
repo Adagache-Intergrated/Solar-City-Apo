@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adagache Oil & Gas | Adagache Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .oilgas-accent { color: #ff9500; }
+    .oilgas-gradient {
+      background: linear-gradient(135deg, #ff9500, #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .product-card {
+      background: linear-gradient(160deg, #111 0%, #080808 100%);
+      border: 1px solid rgba(255,149,0,0.1);
+      border-radius: 28px;
+      padding: 40px 32px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff9500, transparent);
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .product-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(255,149,0,0.1); }
+    .product-card:hover::before { opacity: 1; }
+    .product-card-icon {
+      width: 72px; height: 72px;
+      border-radius: 22px;
+      background: rgba(255,149,0,0.08);
+      border: 1px solid rgba(255,149,0,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.9rem;
+      margin-bottom: 24px;
+    }
+    .product-card h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 12px; }
+    .product-card p { color: var(--muted); line-height: 1.75; font-size: 0.9rem; }
+    .pipeline-section {
+      background: linear-gradient(145deg, #0a0600 0%, #050300 100%);
+      border-top: 1px solid rgba(255,149,0,0.1);
+      border-bottom: 1px solid rgba(255,149,0,0.1);
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .process-step {
+      padding: 40px 30px;
+      text-align: center;
+      border-right: 1px solid rgba(255,149,0,0.08);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-num {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,149,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 900;
+      color: #ff9500;
+      margin: 0 auto 20px;
+      background: rgba(255,149,0,0.05);
+    }
+    .process-step h4 { font-weight: 800; margin-bottom: 10px; font-size: 1rem; }
+    .process-step p { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .safety-card {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 26px;
+      border-radius: 20px;
+      background: rgba(255,149,0,0.03);
+      border: 1px solid rgba(255,149,0,0.08);
+      transition: 0.3s;
+    }
+    .safety-card:hover { background: rgba(255,149,0,0.06); border-color: rgba(255,149,0,0.18); }
+    .safety-icon {
+      width: 50px; height: 50px; border-radius: 14px;
+      background: rgba(255,149,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      color: #ff9500; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .safety-card h4 { font-weight: 700; margin-bottom: 6px; font-size: 0.95rem; }
+    .safety-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+    .stat-highlight {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .stat-hl-card {
+      text-align: center;
+      padding: 36px 24px;
+      border-radius: 26px;
+      background: rgba(255,149,0,0.04);
+      border: 1px solid rgba(255,149,0,0.1);
+    }
+    .stat-hl-card h3 { font-size: 2.6rem; font-weight: 900; }
+    .stat-hl-card p { color: var(--muted); font-size: 0.8rem; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Oil%20and%20Gas,%20I%20would%20like%20to%20make%20an%20enquiry" class="floating-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- SHARED HEADER -->
+<header>
+  <div class="nav-container">
+    <a href="index (1).html" class="logo-area">
+      <img src="images/adagache-oil-gas.png.png" alt="Adagache Oil & Gas Logo" class="site-logo" id="siteLogo"
+        onerror="this.src='https://placehold.co/180x60/111111/ff9500?text=OIL+%26+GAS'">
+      <div class="logo-text">
+        <h1 style="background:linear-gradient(135deg,#ffcc80,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.45rem;font-weight:900;letter-spacing:2px;line-height:1;">OIL & GAS</h1>
+        <p>BY ADAGACHE GROUP</p>
+      </div>
+    </a>
+    <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index (1).html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#safety">Safety</a>
+      <a href="#contact-section">Contact</a>
+      <a href="oil-gas.html" class="active"><i class="fas fa-fire-flame-curved" style="color:#ff9500;font-size:0.75rem;"></i> Oil & Gas</a>
+      <a href="travel.html"><i class="fas fa-plane" style="color:var(--gold);font-size:0.75rem;"></i> Travel</a>
+      <a href="integrated.html"><i class="fas fa-globe" style="color:var(--gold);font-size:0.75rem;"></i> Integrated</a>
+      <a href="autos.html"><i class="fas fa-car" style="color:var(--gold);font-size:0.75rem;"></i> Autos</a>
+      <a href="https://wa.me/2348030702010" class="nav-btn" target="_blank"><i class="fab fa-whatsapp"></i> Enquire Now</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1600&auto=format&fit=crop');"></div>
+  <div class="service-hero-overlay"></div>
+
+  <div class="service-hero-content">
+    <div class="service-hero-tag">
+      <i class="fas fa-fire-flame-curved" style="color:#ff9500;"></i>
+      ENERGY SOLUTIONS COMPANY
+    </div>
+
+    <div class="service-logo-wrap">
+      <img src="images/adagache-oil-gas.png.png" alt="Adagache Oil & Gas"
+        class="service-logo-img"
+        onerror="this.src='https://placehold.co/400x200/111111/ff9500?text=ADAGACHE+OIL+%26+GAS'">
+    </div>
+
+    <h2>
+      <span class="oilgas-gradient">POWERING</span><br>
+      NIGERIA'S<br>
+      FUTURE
+    </h2>
+    <p>Adagache Oil & Gas delivers premium energy solutions — from petroleum product supply to gas distribution and energy infrastructure — fuelling industry, homes, and businesses across Nigeria.</p>
+
+    <div class="service-hero-actions">
+      <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Oil%20and%20Gas,%20I%20need%20fuel%20supply%20for%20my%20business" target="_blank" class="primary-btn">
+        <i class="fab fa-whatsapp"></i> Request Supply Quote
+      </a>
+      <a href="#services" class="secondary-btn">
+        <i class="fas fa-chevron-down"></i> Our Services
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hero-stat">
+      <h3 class="oilgas-gradient">5+</h3>
+      <p>Years in Energy Sector</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="oilgas-gradient">500+</h3>
+      <p>Clients Served</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="oilgas-gradient">24/7</h3>
+      <p>Supply Availability</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="oilgas-gradient">100%</h3>
+      <p>Quality Assured</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="background:#080808;">
+  <div class="container">
+    <div class="section-head">
+      <small>What We Offer</small>
+      <h2>Our <span class="oilgas-gradient">Energy Services</span></h2>
+      <p>Comprehensive petroleum and gas solutions tailored for businesses, industries, and individuals across Nigeria.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px;">
+      <div class="product-card">
+        <div class="product-card-icon">⛽</div>
+        <h3>Premium Fuel Supply</h3>
+        <p>Reliable bulk and retail supply of PMS (petrol), AGO (diesel), and kerosene for businesses, generators, fleet managers, and industrial plants. Guaranteed quality and timely delivery.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">🔥</div>
+        <h3>LPG Gas Distribution</h3>
+        <p>Safe and certified liquefied petroleum gas supply for households, restaurants, hotels, and industrial kitchens. We handle logistics from depot to your doorstep across Abuja and beyond.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">🏭</div>
+        <h3>Industrial Energy Solutions</h3>
+        <p>Specialized energy supply packages for manufacturing plants, construction sites, and industrial facilities. Bulk AGO contracts with SLAs, volume discounts, and dedicated account managers.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">🚛</div>
+        <h3>Haulage & Logistics</h3>
+        <p>Certified petroleum product haulage using a fleet of licensed tankers. We ensure compliant, safe, and efficient movement of petroleum products from depots to final delivery points.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">🛢️</div>
+        <h3>Petroleum Consultancy</h3>
+        <p>Expert advisory services for businesses entering the downstream oil and gas sector. Licensing guidance, regulatory compliance, market analysis, and investment planning.</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">⚙️</div>
+        <h3>Equipment Leasing</h3>
+        <p>Provision of oil and gas handling equipment — storage tanks, pumps, dispensers, and safety kits — for businesses that need short-term or long-term operational solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section pipeline-section" id="process">
+  <div class="container">
+    <div class="section-head">
+      <small>How We Work</small>
+      <h2>Our <span class="oilgas-gradient">Supply Process</span></h2>
+      <p>From first enquiry to delivery, our streamlined process ensures speed, compliance, and total peace of mind for every client.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Enquiry & Consultation</h4>
+        <p>Reach out via WhatsApp or phone. Our team assesses your fuel type, volume, and delivery schedule requirements.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Quote & Agreement</h4>
+        <p>We provide a competitive, transparent quotation with a formal supply agreement outlining delivery timelines and volumes.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Order Processing</h4>
+        <p>Upon confirmation, we mobilize our certified tankers and coordinate with licensed depots to load your product safely.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Certified Delivery</h4>
+        <p>Products are delivered to your site with full documentation — waybills, quality certificates, and delivery confirmation.</p>
+      </div>
+    </div>
+
+    <div class="stat-highlight">
+      <div class="stat-hl-card">
+        <h3 class="oilgas-gradient">48hrs</h3>
+        <p>Average Delivery Turnaround</p>
+      </div>
+      <div class="stat-hl-card">
+        <h3 class="oilgas-gradient">DPR</h3>
+        <p>Certified & Compliant</p>
+      </div>
+      <div class="stat-hl-card">
+        <h3 class="oilgas-gradient">FCT</h3>
+        <p>Primary Service Area</p>
+      </div>
+      <div class="stat-hl-card">
+        <h3 class="oilgas-gradient">₦0</h3>
+        <p>Hidden Delivery Fees</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section class="section" id="safety" style="background:#060401;">
+  <div class="container">
+    <div class="section-head">
+      <small>Our Commitment</small>
+      <h2>Safety <span class="oilgas-gradient">Above All</span></h2>
+      <p>Every product we handle, every delivery we make, is guided by the highest safety and regulatory standards in the petroleum industry.</p>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-shield-halved"></i></div>
+        <div>
+          <h4>DPR Licensed Operations</h4>
+          <p>All our operations are conducted under valid licenses from the Department of Petroleum Resources, ensuring full regulatory compliance at every stage.</p>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-fire-extinguisher"></i></div>
+        <div>
+          <h4>Fire Safety Protocols</h4>
+          <p>Our drivers and handlers are trained in fire safety, spillage prevention, and emergency response to minimize risks during storage and transportation.</p>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-flask"></i></div>
+        <div>
+          <h4>Product Quality Assurance</h4>
+          <p>Every batch of petroleum product is tested and certified for quality. We source exclusively from certified NNPC and licensed downstream depots.</p>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-truck-medical"></i></div>
+        <div>
+          <h4>Insured Haulage Fleet</h4>
+          <p>Our tankers carry full haulage insurance, are regularly inspected, and comply with road-worthiness standards set by the Federal Road Safety Commission.</p>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-clipboard-check"></i></div>
+        <div>
+          <h4>Full Documentation</h4>
+          <p>Every transaction is backed by certified waybills, delivery notes, quantity certificates, and signed delivery receipts for complete traceability.</p>
+        </div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon"><i class="fas fa-headset"></i></div>
+        <div>
+          <h4>Dedicated Support Line</h4>
+          <p>Our operations team is reachable around the clock to address delivery queries, emergencies, or service escalations without delay.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact-section">
+  <div class="container">
+    <div class="cta-section glass">
+      <div class="section-head" style="margin-bottom:0;">
+        <small>Get Started Today</small>
+        <h2>Need <span class="oilgas-gradient">Energy Supply?</span></h2>
+        <p>Whether you need bulk diesel, LPG, or petroleum logistics, Adagache Oil & Gas has the right solution. Reach out now for a fast, competitive quote.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Oil%20%26%20Gas,%20I%20need%20a%20fuel%20supply%20quote" target="_blank" class="primary-btn">
+          <i class="fab fa-whatsapp"></i> Get Supply Quote
+        </a>
+        <a href="tel:08030702010" class="secondary-btn"><i class="fas fa-phone"></i> Call 08030702010</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2 style="background:linear-gradient(135deg,#ffcc80,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.6rem;font-weight:900;">ADAGACHE OIL & GAS</h2>
+      <p>ENERGY • SUPPLY • EXCELLENCE</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Adagache Homes</a>
+      <a href="oil-gas.html">Oil & Gas</a>
+      <a href="travel.html">Travels & Tours</a>
+      <a href="integrated.html">Integrated Global</a>
+      <a href="autos.html">Autos</a>
+    </div>
+    <div class="footer-contact">
+      <a href="https://instagram.com/adagachehomes" class="instagram" target="_blank"><i class="fab fa-instagram"></i> @adagachehomes</a>
+      <a href="mailto:Adagachehomes@gmail.com" style="color:var(--muted);font-size:0.85rem;">Adagachehomes@gmail.com</a>
+      <a href="tel:08030702010" class="phone">08030702010</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

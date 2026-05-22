@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adagache Integrated Global Services | Adagache Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    .integrated-gradient {
+      background: linear-gradient(135deg, #d4af37, #fff4c7, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pillar-big-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .pillar-big-card {
+      background: linear-gradient(160deg, #0d0d0d 0%, #070707 100%);
+      border: 1px solid rgba(212,175,55,0.08);
+      border-radius: 32px;
+      padding: 44px 36px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-big-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: 0.4s;
+    }
+    .pillar-big-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.2); }
+    .pillar-big-card:hover::before { opacity: 1; }
+    .pillar-num {
+      font-size: 5rem; font-weight: 900;
+      background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: -10px;
+      display: block;
+    }
+    .pillar-big-card h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 14px; }
+    .pillar-big-card p { color: var(--muted); line-height: 1.75; font-size: 0.9rem; }
+    .pillar-icon-wrap {
+      width: 70px; height: 70px; border-radius: 20px;
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 22px;
+    }
+    .subsidiaries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .subsidiary-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(212,175,55,0.08);
+      border-radius: 26px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: 0.35s;
+      text-decoration: none;
+      display: block;
+    }
+    .subsidiary-card:hover { background: rgba(212,175,55,0.04); border-color: rgba(212,175,55,0.2); transform: translateY(-8px); }
+    .subsidiary-icon { font-size: 3rem; margin-bottom: 18px; display: block; }
+    .subsidiary-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 10px; }
+    .subsidiary-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.65; }
+    .subsidiary-link { display: inline-block; margin-top: 16px; color: var(--gold); font-size: 0.8rem; font-weight: 700; }
+    .vision-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.1);
+    }
+    .vision-panel {
+      padding: 70px 60px;
+    }
+    .vision-panel:first-child {
+      background: linear-gradient(145deg, #0d0b02 0%, #080600 100%);
+      border-right: 1px solid rgba(212,175,55,0.1);
+    }
+    .vision-panel:last-child { background: #060606; }
+    .vision-panel small {
+      letter-spacing: 6px; text-transform: uppercase;
+      color: var(--gold); font-weight: 700; font-size: 0.75rem;
+      display: block; margin-bottom: 20px;
+    }
+    .vision-panel h3 { font-size: 2.2rem; font-weight: 900; margin-bottom: 22px; line-height: 1.2; }
+    .vision-panel p { color: var(--muted); line-height: 1.85; margin-bottom: 18px; }
+    .core-values {
+      display: flex; flex-direction: column; gap: 16px; margin-top: 10px;
+    }
+    .core-value {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.07);
+    }
+    .cv-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0; margin-top: 5px;
+    }
+    .core-value h4 { font-weight: 700; margin-bottom: 4px; font-size: 0.9rem; }
+    .core-value p { color: var(--muted); font-size: 0.82rem; line-height: 1.5; margin: 0; }
+    .rc-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: rgba(212,175,55,0.07);
+      border: 1px solid rgba(212,175,55,0.2);
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 30px;
+    }
+    @media (max-width: 768px) {
+      .vision-block { grid-template-columns: 1fr; }
+      .vision-panel { padding: 50px 30px; }
+      .vision-panel:first-child { border-right: none; border-bottom: 1px solid rgba(212,175,55,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Integrated%20Global,%20I%20would%20like%20to%20make%20a%20business%20enquiry" class="floating-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- SHARED HEADER -->
+<header>
+  <div class="nav-container">
+    <a href="index (1).html" class="logo-area">
+      <img src="images/adagache-intergrated.png.png" alt="Adagache Integrated Global Logo" class="site-logo" id="siteLogo"
+        onerror="this.src='https://placehold.co/180x60/111111/d4af37?text=INTEGRATED'">
+      <div class="logo-text">
+        <h1 class="gold-text" style="font-size:1.2rem;font-weight:900;letter-spacing:1.5px;line-height:1;">INTEGRATED GLOBAL</h1>
+        <p>BY ADAGACHE GROUP · RC: 7378121</p>
+      </div>
+    </a>
+    <button class="mobile-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index (1).html">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#subsidiaries">Subsidiaries</a>
+      <a href="#contact-section">Contact</a>
+      <a href="oil-gas.html"><i class="fas fa-fire-flame-curved" style="color:#ff9500;font-size:0.75rem;"></i> Oil & Gas</a>
+      <a href="travel.html"><i class="fas fa-plane" style="color:#00d4ff;font-size:0.75rem;"></i> Travel</a>
+      <a href="integrated.html" class="active"><i class="fas fa-globe" style="color:var(--gold);font-size:0.75rem;"></i> Integrated</a>
+      <a href="autos.html"><i class="fas fa-car" style="color:var(--gold);font-size:0.75rem;"></i> Autos</a>
+      <a href="https://wa.me/2348030702010" class="nav-btn" target="_blank"><i class="fab fa-whatsapp"></i> Partner With Us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="service-hero">
+  <div class="service-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop');"></div>
+  <div class="service-hero-overlay"></div>
+
+  <div class="service-hero-content">
+    <div class="service-hero-tag">
+      <i class="fas fa-globe" style="color:var(--gold);"></i>
+      FLAGSHIP HOLDING COMPANY · RC: 7378121
+    </div>
+
+    <div class="service-logo-wrap">
+      <img src="images/adagache-intergrated.png.png" alt="Adagache Integrated Global"
+        class="service-logo-img"
+        onerror="this.src='https://placehold.co/400x200/111111/d4af37?text=ADAGACHE+INTEGRATED'">
+    </div>
+
+    <h2>
+      <span class="integrated-gradient">BUILDING</span><br>
+      A GLOBAL<br>
+      LEGACY
+    </h2>
+    <p>Adagache Integrated Global Services Limited is the flagship holding company driving strategy, innovation, investment, and cross-sector growth across the entire Adagache Group of Companies. RC: 7378121.</p>
+
+    <div class="service-hero-actions">
+      <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Integrated,%20I%20would%20like%20to%20explore%20a%20business%20partnership" target="_blank" class="primary-btn">
+        <i class="fab fa-whatsapp"></i> Explore Partnership
+      </a>
+      <a href="#about" class="secondary-btn">
+        <i class="fas fa-info-circle"></i> About The Group
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hero-stat">
+      <h3 class="gold-text">4+</h3>
+      <p>Active Subsidiaries</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="gold-text">5+</h3>
+      <p>Years of Excellence</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="gold-text">FCT</h3>
+      <p>Abuja Headquarters</p>
+    </div>
+    <div class="hero-stat">
+      <h3 class="gold-text">Global</h3>
+      <p>Growth Vision</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="background:#060606;">
+  <div class="container">
+    <div class="vision-block">
+      <div class="vision-panel">
+        <div class="rc-badge"><i class="fas fa-registered"></i> CAC Registered — RC: 7378121</div>
+        <small>Our Vision</small>
+        <h3>To Be Africa's Most <span class="gold-text">Trusted Business Group</span></h3>
+        <p>Adagache Integrated Global Services Limited was founded with a bold mission: to build a diversified, impact-driven enterprise that creates lasting value across multiple industries — from real estate and energy to travel and mobility.</p>
+        <p>We believe in doing business with integrity, leveraging innovation, and empowering communities through sustainable commerce and responsible investment.</p>
+        <p>Our RC registration (7378121) with the Corporate Affairs Commission of Nigeria reflects our commitment to legitimacy, transparency, and professional governance at every level of our operations.</p>
+      </div>
+      <div class="vision-panel">
+        <small>Core Values</small>
+        <h3>The Principles That <span class="gold-text">Drive Us</span></h3>
+        <div class="core-values">
+          <div class="core-value">
+            <div class="cv-dot"></div>
+            <div><h4>Integrity First</h4><p>Every business decision we make is grounded in honesty, transparency, and ethical conduct — no exceptions.</p></div>
+          </div>
+          <div class="core-value">
+            <div class="cv-dot"></div>
+            <div><h4>Excellence Always</h4><p>We hold our services, products, and partnerships to the highest standard of quality and professionalism.</p></div>
+          </div>
+          <div class="core-value">
+            <div class="cv-dot"></div>
+            <div><h4>Innovation-Led Growth</h4><p>We continuously evolve our business models and embrace new technologies to remain ahead of industry trends.</p></div>
+          </div>
+          <div class="core-value">
+            <div class="cv-dot"></div>
+            <div><h4>Community Impact</h4><p>Our growth is measured not just in revenue but in the positive change we create in the communities we serve.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="background:#040404;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <small>What We Do</small>
+      <h2>Group <span class="gold-text">Service Pillars</span></h2>
+      <p>Our integrated approach combines strategy, capital, operations, and talent to create scalable, sustainable business value.</p>
+    </div>
+    <div class="pillar-big-grid">
+      <div class="pillar-big-card">
+        <span class="pillar-num">01</span>
+        <div class="pillar-icon-wrap">🏛️</div>
+        <h3>Corporate Strategy & Governance</h3>
+        <p>Group-wide strategic planning, board governance, and corporate policy formulation to drive coherent direction and accountability across all subsidiaries.</p>
+      </div>
+      <div class="pillar-big-card">
+        <span class="pillar-num">02</span>
+        <div class="pillar-icon-wrap">💰</div>
+        <h3>Investment & Capital Management</h3>
+        <p>Identifying, structuring, and managing investment opportunities across sectors including real estate, energy, mobility, and hospitality for optimal returns.</p>
+      </div>
+      <div class="pillar-big-card">
+        <span class="pillar-num">03</span>
+        <div class="pillar-icon-wrap">🤝</div>
+        <h3>Partnerships & Business Development</h3>
+        <p>Building and maintaining strategic alliances with investors, corporations, government agencies, and international organizations to expand our market reach.</p>
+      </div>
+      <div class="pillar-big-card">
+        <span class="pillar-num">04</span>
+        <div class="pillar-icon-wrap">📊</div>
+        <h3>Market Intelligence & Research</h3>
+        <p>Continuous market analysis and sector research to inform business decisions, identify growth opportunities, and stay ahead in competitive landscapes.</p>
+      </div>
+      <div class="pillar-big-card">
+        <span class="pillar-num">05</span>
+        <div class="pillar-icon-wrap">🌍</div>
+        <h3>International Trade & Export</h3>
+        <p>Facilitating cross-border trade transactions, export opportunities, and international business connections for Nigerian enterprises seeking global markets.</p>
+      </div>
+      <div class="pillar-big-card">
+        <span class="pillar-num">06</span>
+        <div class="pillar-icon-wrap">🎯</div>
+        <h3>Brand & Creative Management</h3>
+        <p>Overseeing brand equity, digital presence, marketing strategy, and creative execution across all Adagache Group subsidiaries and ventures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSIDIARIES -->
+<section class="section" id="subsidiaries" style="background:#080808;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <small>The Adagache Group</small>
+      <h2>Our <span class="gold-text">Subsidiary Companies</span></h2>
+      <p>Four powerful divisions operating under the Adagache Integrated Global Services umbrella — each delivering excellence in their respective industries.</p>
+    </div>
+    <div class="subsidiaries-grid">
+      <a href="index.html" class="subsidiary-card">
+        <span class="subsidiary-icon">🏠</span>
+        <h3 class="gold-text">Adagache Homes</h3>
+        <p>Premium real estate development and property sales. Home of the acclaimed Solar City Apo project in Abuja with FCDA C of O.</p>
+        <span class="subsidiary-link">Visit Division <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="oil-gas.html" class="subsidiary-card">
+        <span class="subsidiary-icon">⛽</span>
+        <h3 class="gold-text">Adagache Oil & Gas</h3>
+        <p>Licensed petroleum product supply, LPG distribution, industrial energy solutions, and certified haulage services across Nigeria.</p>
+        <span class="subsidiary-link">Visit Division <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="travel.html" class="subsidiary-card">
+        <span class="subsidiary-icon">✈️</span>
+        <h3 class="gold-text">Adagache Travels & Tours</h3>
+        <p>World-class flight bookings, visa consultations, hotel reservations, and luxury tour packages for discerning travellers worldwide.</p>
+        <span class="subsidiary-link">Visit Division <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="autos.html" class="subsidiary-card">
+        <span class="subsidiary-icon">🚗</span>
+        <h3 class="gold-text">Adagache Autos</h3>
+        <p>Premium automobile dealership, luxury car sales, vehicle financing, and after-sales service for individuals and corporate clients.</p>
+        <span class="subsidiary-link">Visit Division <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact-section">
+  <div class="container">
+    <div class="cta-section glass">
+      <div class="section-head" style="margin-bottom:0;">
+        <small>Let's Build Together</small>
+        <h2>Partner With <span class="gold-text">Adagache Group</span></h2>
+        <p>Whether you're an investor, a corporate partner, or an entrepreneur looking to align with a trusted business group, we'd love to connect and explore opportunities together.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Integrated,%20I%20want%20to%20explore%20a%20partnership" target="_blank" class="primary-btn">
+          <i class="fab fa-whatsapp"></i> Discuss Partnership
+        </a>
+        <a href="tel:08030702010" class="secondary-btn"><i class="fas fa-phone"></i> Call 08030702010</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2 class="gold-text">ADAGACHE INTEGRATED</h2>
+      <p>STRATEGY • GROWTH • LEGACY · RC: 7378121</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Adagache Homes</a>
+      <a href="oil-gas.html">Oil & Gas</a>
+      <a href="travel.html">Travels & Tours</a>
+      <a href="integrated.html">Integrated Global</a>
+      <a href="autos.html">Autos</a>
+    </div>
+    <div class="footer-contact">
+      <a href="https://instagram.com/adagachehomes" class="instagram" target="_blank"><i class="fab fa-instagram"></i> @adagachehomes</a>
+      <a href="mailto:Adagachehomes@gmail.com" style="color:var(--muted);font-size:0.85rem;">Adagachehomes@gmail.com</a>
+      <a href="tel:08030702010" class="phone">08030702010</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

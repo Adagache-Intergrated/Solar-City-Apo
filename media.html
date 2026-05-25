@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Media, Arts & Philanthropy | Adagache Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <style>
+    /* Media/Creative specific gradients matching the style guidelines */
+    .media-gradient {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .foundation-gradient {
+      background: linear-gradient(135deg, #fff4c7 0%, #d4af37 50%, #f3df9b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Video Showroom Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .video-card {
+      background: linear-gradient(160deg, #111111 0%, #080808 100%);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+    }
+
+    .thumbnail-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      background: #000;
+      overflow: hidden;
+    }
+
+    .thumbnail-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .video-card:hover .thumbnail-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .play-btn-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 1.5rem;
+      padding-left: 4px; /* Align play triangle perfectly center */
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover .play-btn-icon {
+      transform: scale(1.1);
+    }
+
+    .video-info {
+      padding: 24px;
+    }
+
+    .video-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .video-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    /* Foundation & Charitable Giving Section */
+    .foundation-box {
+      background: linear-gradient(150deg, #121212 0%, #0a0a0a 100%);
+      border: 1px solid var(--border);
+      border-radius: 36px;
+      padding: 60px;
+      margin-top: 50px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .foundation-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .bank-card-container {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      align-items: center;
+    }
+
+    .bank-details-card {
+      background: linear-gradient(135deg, #1c1a14 0%, #11100d 100%);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 24px;
+      padding: 35px;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .bank-chip {
+      width: 45px;
+      height: 35px;
+      background: linear-gradient(135deg, #edd287, #bfa04a);
+      border-radius: 8px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .bank-field {
+      margin-bottom: 20px;
+    }
+
+    .bank-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .bank-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .bank-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .bank-value.acc-num {
+      font-family: monospace;
+      font-size: 1.7rem;
+      color: var(--gold-light);
+    }
+
+    .copy-btn {
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: var(--gold-light);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    @media(max-width: 768px) {
+      .foundation-box {
+        padding: 35px 20px;
+      }
+      .bank-details-card {
+        padding: 25px;
+      }
+      .bank-value.acc-num {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Group,%20I'm%20reaching%20out%20regarding%20Media%20and%20Philanthropy" class="floating-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo-area">
+      <img src="images/logo.png" alt="Adagache Group Logo" class="site-logo" id="siteLogo"
+        onerror="this.src='https://placehold.co/180x60/111111/d4af37?text=ADAGACHE'">
+      <div class="logo-text">
+        <h1 class="gold-text">ADAGACHE ENTERTAINMENT</h1>
+        <p>MEDIA • ARTS • FOUNDATION</p>
+      </div>
+    </a>
+
+    <button class="mobile-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="#creative-showroom">Media Hub</a>
+      <a href="#foundation">Foundation</a>
+      <a href="oil-gas.html"><i class="fas fa-fire-flame-curved" style="color:var(--gold);font-size:0.75rem;"></i> Oil & Gas</a>
+      <a href="travel.html"><i class="fas fa-plane" style="color:var(--gold);font-size:0.75rem;"></i> Travel</a>
+      <a href="integrated.html"><i class="fas fa-globe" style="color:var(--gold);font-size:0.75rem;"></i> Integrated</a>
+      <a href="autos.html"><i class="fas fa-car" style="color:var(--gold);font-size:0.75rem;"></i> Autos</a>
+      <a href="media.html" class="active"><i class="fas fa-film" style="color:var(--gold);font-size:0.75rem;"></i> Creative</a>
+      <a href="https://wa.me/2348030702010" class="nav-btn" target="_blank"><i class="fab fa-whatsapp"></i> Contact Group</a>
+    </nav>
+  </div>
+</header>
+
+<section class="service-hero">
+  <div class="service-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=80');"></div>
+  <div class="service-hero-overlay"></div>
+  <div class="service-hero-content">
+    <div class="service-hero-tag"><i class="fas fa-music"></i> Expression & Humanity</div>
+    <h2>CREATIVE MEDIA &<br><span class="media-gradient">PHILANTHROPY</span></h2>
+    <p>Exploring the ultimate expressions of faith, artistic storytelling, and human compassion. Led by Adagache John Abbah, we blend musical artistry and visual entertainment with a structural purpose to lift lives and redefine horizons.</p>
+    
+    <div class="service-hero-actions">
+      <a href="#creative-showroom" class="secondary-btn"><i class="fas fa-play-circle"></i> Watch Media Hub</a>
+      <a href="#foundation" class="primary-btn" style="background: var(--gold); color: black;">
+        <i class="fas fa-hand-holding-heart"></i> Support Foundation
+      </a>
+    </div>
+
+    <div class="hero-stats-bar">
+      <div class="hero-stat">
+        <h3 class="gold-text">EP</h3>
+        <p>King Jesus Debut</p>
+      </div>
+      <div class="hero-stat">
+        <h3 class="gold-text">100%</h3>
+        <p>Charity Transparency</p>
+      </div>
+      <div class="hero-stat">
+        <h3 class="gold-text">Abuja</h3>
+        <p>Creative Base</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="creative-showroom">
+  <div class="container">
+    <div class="section-head">
+      <small>Selected Video Showroom</small>
+      <h2>Artistic & On-Screen Works</h2>
+      <p>Stream directly through YouTube the modern creative output, original songs, live sessions, and feature performances from Adagache John Abbah.</p>
+    </div>
+
+    <div class="video-grid">
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="video-card">
+        <div class="thumbnail-wrapper">
+          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Thumbnail" onerror="this.src='https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'">
+          <div class="play-overlay">
+            <div class="play-btn-icon"><i class="fas fa-play"></i></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Music Release</span>
+          <h3 class="video-title">The King Jesus EP — Official Studio Showcase</h3>
+        </div>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="video-card">
+        <div class="thumbnail-wrapper">
+          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Thumbnail" onerror="this.src='https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'">
+          <div class="play-overlay">
+            <div class="play-btn-icon"><i class="fas fa-play"></i></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Live Session</span>
+          <h3 class="video-title">Faith-Driven Anthems & Acoustic Expressions Live</h3>
+        </div>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="video-card">
+        <div class="thumbnail-wrapper">
+          <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Video Thumbnail" onerror="this.src='https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'">
+          <div class="play-overlay">
+            <div class="play-btn-icon"><i class="fas fa-play"></i></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Acting & Film</span>
+          <h3 class="video-title">Cinematic Performances, Narratives & Media Reels</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="foundation" style="background:#0d0d0d; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="foundation-box">
+      <div class="why-grid" style="grid-template-columns: 1.2fr 0.8fr; gap:40px;">
+        
+        <div class="why-content" style="margin-bottom:0;">
+          <div style="color:var(--gold); font-weight:700; font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; margin-bottom:14px;">Humanitarian Arm</div>
+          <h2 class="foundation-gradient" style="font-size:2.8rem; margin-bottom:20px;">ADAGACHE FOUNDATION</h2>
+          <p style="font-size:1.02rem; line-height:1.8; color:#d2d2d2; margin-bottom:20px;">
+            Adagache Foundation is a beacon of hope and compassion, a place where love finds expression through service to humanity. Established by Adagache Homes Estate under the visionary leadership of Adagache John Abbah, the foundation is driven by a deep commitment to making a difference in the lives of the less privileged.
+          </p>
+          <p style="font-size:0.95rem; line-height:1.8; color:var(--muted); margin-bottom:0;">
+            Through your kind support, interventions stretch across immediate community care, basic provisions, and educational structural access, establishing long-term lifelines for underrepresented groups in Nigeria.
+          </p>
+        </div>
+
+        <div class="bank-card-container" style="grid-template-columns:1fr; margin-top:0;">
+          <div class="bank-details-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div class="bank-chip"></div>
+              <i class="fas fa-heart" style="color:#ff4b2b; font-size:1.4rem;"></i>
+            </div>
+            
+            <div class="bank-field">
+              <div class="bank-label">Bank Name</div>
+              <div class="bank-value">Access Bank</div>
+            </div>
+
+            <div class="bank-field">
+              <div class="bank-label">Account Number</div>
+              <div class="bank-value acc-num" id="accountNumber">0025494693</div>
+              <button class="copy-btn" onclick="copyAccount()"><i class="far fa-copy"></i> Copy Number</button>
+            </div>
+
+            <div class="bank-field" style="margin-bottom:0;">
+              <div class="bank-label">Account Name</div>
+              <div class="bank-value" style="font-size:1.15rem; color:#fff;">Adagache John Abbah</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-section glass">
+      <div class="section-head" style="margin-bottom:0;">
+        <small>Get Involved</small>
+        <h2>Partner With the <span class="gold-text">Vision</span></h2>
+        <p>Whether you want to sponsor a production, feature an artistic portfolio, or link deep partnerships directly with the Adagache Foundation initiatives, our desk is fully open.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/2348030702010?text=Hi%20Adagache%20Group,%20I'm%20interested%20in%20partnering%20with%20your%20Media%20and%20Foundation%20initiatives" target="_blank" class="primary-btn">
+          <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+        </a>
+        <a href="tel:08030702010" class="secondary-btn"><i class="fas fa-phone"></i> Call Group Office</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2 class="gold-text">ADAGACHE GROUP</h2>
+      <p>LUXURY • SPEED • EXCELLENCE</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Adagache Homes</a>
+      <a href="oil-gas.html">Oil & Gas</a>
+      <a href="travel.html">Travels & Tours</a>
+      <a href="integrated.html">Integrated Global</a>
+      <a href="autos.html">Autos</a>
+      <a href="media.html">Media & Arts</a>
+    </div>
+    <div class="footer-contact">
+      <a href="https://instagram.com/adagachehomes" class="instagram-link" target="_blank"><i class="fab fa-instagram"></i> Follow @adagachehomes</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Simple copy to clipboard functionality for the donation setup
+  function copyAccount() {
+    const accountNumText = document.getElementById('accountNumber').innerText;
+    navigator.clipboard.writeText(accountNumText).then(() => {
+      const copyBtn = document.querySelector('.copy-btn');
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      copyBtn.style.background = '#25d366';
+      copyBtn.style.color = '#000';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+        copyBtn.style.background = 'rgba(212, 175, 55, 0.1)';
+        copyBtn.style.color = 'var(--gold-light)';
+      }, 2000);
+    }).catch(err => {
+      console.error('Could not copy text: ', err);
+    });
+  }
+</script>
+</body>
+</html>
